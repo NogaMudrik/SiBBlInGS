@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-@author: --
+@author: Noga Mudrik
 """
 
 # -*- coding: utf-8 -*-

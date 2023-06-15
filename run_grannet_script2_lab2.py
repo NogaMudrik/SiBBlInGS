@@ -2,19 +2,16 @@
 """
 Created on Thu Oct 27 15:12:10 2022
 
-@author: ---
-"""
-import os
-"""
-from Create_Synthetic_poisson import *
+@author: Noga Mudrik
 """
 
 
 
-from main_functions_graft_lab2 import *
+
+from main_functions_SiBBlInGS import *
 from datetime import datetime as datetime2
 ss = int(str(datetime2.now()).split('.')[-1])
-seed = ss # np.random.randint(ss) # 0,aaa[50])l
+seed = ss
 np.random.seed(seed)
 
 
@@ -34,7 +31,7 @@ if type_grannet.startswith('synth_'):
  
 elif type_grannet == 'neuro_bump_angle_active' or type_grannet == 'neuro_bump_angle_active_minmax':
     params_full['inverse_params'] = {'T_inverse':2}
-    n_zer =  2 #np.random.randint(2,3)
+    n_zer =  2
     params_full['n_neighbors'] = n_zer + 5
     params_full['hard_thres_params'] = {'non_zeros': n_zer,
                                        'thres_error_hard_thres': 10,  'keep_last':False,
