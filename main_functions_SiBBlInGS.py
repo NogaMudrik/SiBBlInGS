@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-@author: --
+@author: Noga Mudrik
 """
 
 # -*- coding: utf-8 -*-
@@ -28,7 +28,7 @@ options for the kernel in grannet: "kernel_grannet_type"
 """
 example
 """
-# example: run_GraFT(data =[], corr_kern = [],  params = params_default, grannet=False)
+# example: run_SiBBlInGS(data =[], corr_kern = [],  params = params_default, grannet=False)
 """
 Imports
 """
@@ -508,7 +508,7 @@ def create_proximity_coeffs_based_on_prxoimity(p, proximity = [], num_free_nets 
         1. Which trial we are currently optimizing?
         2. From which trial do we calculate the distance from?
         3. Which network we are talking about?
-    (will later be used in graft_with_grannet for coefficients_similar_nets)
+    (will later be used in SiBBlInGS_with_grannet for coefficients_similar_nets)
     
     condition_unsupervised = we want to use the distances. we do not know (inverse on inverse)
     """
@@ -1004,7 +1004,7 @@ def  create_proximity_matching(data, labels,  increase_diag = True) :
     
     
     
-def run_GraFT(data = [], corr_kern = [], params = {}, to_save = True, to_return = True,
+def run_SiBBlInGS(data = [], corr_kern = [], params = {}, to_save = True, to_return = True,
                ask_selected = ask_selected, selected = ['epsilon','step_s', 'p', 'nonneg','step_decay'
                                                ,'solver', 'l4', 'l1'], grannet = False,
                label_different_trials = [], save_mid_results = True, type_answer = type_answer,
@@ -1492,7 +1492,7 @@ def run_GraFT(data = [], corr_kern = [], params = {}, to_save = True, to_return 
 
     else: 
         """
-        graft case (not grannet)
+        SiBBlInGS case (not grannet)
         """
 
 
@@ -1553,7 +1553,7 @@ def run_GraFT(data = [], corr_kern = [], params = {}, to_save = True, to_return 
     
               
     """
-    run graft
+    run SiBBlInGS
     """
     
     if to_save or save_mid_results:
@@ -1565,13 +1565,13 @@ def run_GraFT(data = [], corr_kern = [], params = {}, to_save = True, to_return 
         
     elif grannet:
 
-        full_phi, full_A, additional_return, error_list = GraFT_with_GraNNet(data, [],corr_kern, params,  coefficients_similar_nets = coefficients_similar_nets
+        full_phi, full_A, additional_return, error_list = SiBBlInGS_with_GraNNet(data, [],corr_kern, params,  coefficients_similar_nets = coefficients_similar_nets
                             , grannet = True,  seed = 0,  to_store_lambdas = params['to_store_lambdas'],
                             save_mid_results = save_mid_results, dataname = data_type, save_name = save_name, 
                             path_name = path_name, labels = labels)
         
     else:
-        phi, A, additional_return, error_list = GraFT_with_GraNNet(data, [],corr_kern, params,  
+        phi, A, additional_return, error_list = SiBBlInGS_with_GraNNet(data, [],corr_kern, params,  
                                                                  coefficients_similar_nets =[]
                            , grannet = False,  seed = 0,  to_store_lambdas = params['to_store_lambdas'],
                            save_mid_results=save_mid_results, dataname = data_type, save_name = save_name, 
@@ -1725,7 +1725,7 @@ def norm_vec_min_max(vec)  :
     return (vec - np.min(vec))/(vec.max() - np.min(vec))
     
           
-def GraFT_with_GraNNet(data, phi, kernel, params,  coefficients_similar_nets = [], grannet = True,  seed = 0,
+def SiBBlInGS_with_GraNNet(data, phi, kernel, params,  coefficients_similar_nets = [], grannet = True,  seed = 0,
                        to_store_lambdas = params_default['to_store_lambdas'], 
                        save_mid_results = True, path_save = '', T_save = 10, dataname = 'unknown', 
                        save_name = 'def', path_name = '', labels = []):
@@ -3965,7 +3965,7 @@ def calcAffinityMat(data, params,  data_name = 'none', use_former = False, K_sym
     
     """
     below:
-    this one is ONLY for graft (not grannet) or the grannet case of 'ind' (i.e. when params[graph_params]['kernel_grannet_type'] is ind) or one_kernel
+    this one is ONLY for SiBBlInGS (not grannet) or the grannet case of 'ind' (i.e. when params[graph_params]['kernel_grannet_type'] is ind) or one_kernel
     """
     if not grannet or len(data.shape) == 2:#graph_params['kernel_grannet_type'] in ['ind']:
             
@@ -4305,7 +4305,7 @@ def findNeighDict(data, params, data_name = 'none',
     Returns:
     - Nearest neighbors dictionary
 
-    this one is ONLY for graft (not grannet/sibblings) or the grannet case of 'ind' (i.e. when params[graph_params]['kernel_grannet_type'] is ind)
+    this one is ONLY for SiBBlInGS (not grannet/sibblings) or the grannet case of 'ind' (i.e. when params[graph_params]['kernel_grannet_type'] is ind)
     """
     save_knn_path = data_name + '%s.npy'%addi #np.save()
     if use_former and os.path.isfile(save_knn_path) :
@@ -4861,7 +4861,7 @@ def from_folder_to_array(path_images =  r'./'
 
     Parameters:
     path_images (str): Path to the folder containing the images. Default is 
-        r'E:/CODES FROM GITHUB/GraFT-analysis/code/neurofinder.02.00/images'.
+        r'E:/CODES FROM GITHUB/SiBBlInGS-analysis/code/neurofinder.02.00/images'.
     max_images (int): Maximum number of images to load. Default is 100.
 
     Returns:
@@ -4885,7 +4885,7 @@ def load_image_to_array(path_images =  r'./',
 
     Parameters:
     path_images (str): Path to the folder containing the image. Default is 
-        r'E:/CODES FROM GITHUB/GraFT-analysis/code/neurofinder.02.00/images'.
+        r'E:/CODES FROM GITHUB/SiBBlInGS-analysis/code/neurofinder.02.00/images'.
     image_to_load (str): Filename of the image to load. Default is 
         'image07971.tiff'.
 
@@ -5024,7 +5024,7 @@ def plot_grphs_networks(type_mapping = 'trends'):
     """
     if type_mapping == 'trends':
         mapping = np.load('mapping_trends.npy', allow_pickle=True).item()
-        path_result = r'E:\CODES FROM GITHUB\GraFT_Python\GraFT_Python\trends\2022-10-31\kk.npy'
+        path_result = r'E:\CODES FROM GITHUB\SiBBlInGS_Python\SiBBlInGS_Python\trends\2022-10-31\kk.npy'
        
         
     n = np.load(path_result, allow_pickle=True).item()

@@ -2,19 +2,16 @@
 """
 Created on Thu Oct 27 15:12:10 2022
 
-@author: ---
-"""
-import os
-"""
-from Create_Synthetic_poisson import *
+@author: Noga Mudrik
 """
 
 
 
-from main_functions_graft_lab2 import *
+
+from main_functions_SiBBlInGS import *
 from datetime import datetime as datetime2
 ss = int(str(datetime2.now()).split('.')[-1])
-seed = ss # np.random.randint(ss) # 0,aaa[50])l
+seed = ss
 np.random.seed(seed)
 
 
@@ -29,12 +26,12 @@ params_full = params_default
 
 if type_grannet.startswith('synth_'): 
     params_full['p'] = 10
-    full_A, full_phi, additional_return = run_GraFT(data = 'data_synth_grannet_xmin_0_xmax_n_ymin_0_ymax_n.npy', corr_kern = []  ,
+    full_A, full_phi, additional_return = run_SiBBlInGS(data = 'data_synth_grannet_xmin_0_xmax_n_ymin_0_ymax_n.npy', corr_kern = []  ,
           params = params_full , grannet=True, images = False, data_type = 'synth_grannet') 
  
 elif type_grannet == 'neuro_bump_angle_active' or type_grannet == 'neuro_bump_angle_active_minmax':
     params_full['inverse_params'] = {'T_inverse':2}
-    n_zer =  2 #np.random.randint(2,3)
+    n_zer =  2
     params_full['n_neighbors'] = n_zer + 5
     params_full['hard_thres_params'] = {'non_zeros': n_zer,
                                        'thres_error_hard_thres': 10,  'keep_last':False,
@@ -66,14 +63,14 @@ elif type_grannet == 'neuro_bump_angle_active' or type_grannet == 'neuro_bump_an
             params_full['p'] = j
             params_full['max_learn'] = 300
             params_full['is_trials_type'] = type_kernel
-            full_A, full_phi, additional_return = run_GraFT(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
+            full_A, full_phi, additional_return = run_SiBBlInGS(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
                   params = params_full , grannet=True, images = False, data_type = type_grannet , 
                   labels_name = 'labels_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet) 
     else:
         params_full['p'] = int(n_nets)
       
         params_full['is_trials_type'] = type_kernel
-        full_A, full_phi, additional_return = run_GraFT(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
+        full_A, full_phi, additional_return = run_SiBBlInGS(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
               params = params_full , grannet=True, images = False, data_type = type_grannet , 
               labels_name = 'labels_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet) #'kernel_synth_xmin_0_xmax_70_ymin_0_ymax_70.npy''kernel_synth_grannet_xmin_0_xmax_n_ymin_0_ymax_n.npy'
             
@@ -130,14 +127,14 @@ elif type_grannet ==  'trends_grannet':
             params_full['p'] = j
             params_full['max_learn'] = 300
             params_full['is_trials_type'] = type_kernel
-            full_A, full_phi, additional_return = run_GraFT(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
+            full_A, full_phi, additional_return = run_SiBBlInGS(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
                   params = params_full , grannet=True, images = False, data_type = type_grannet , 
                   labels_name = 'labels_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet) #'kernel_synth_xmin_0_xmax_70_ymin_0_ymax_70.npy''kernel_synth_grannet_xmin_0_xmax_n_ymin_0_ymax_n.npy'
     else:
         params_full['p'] = int(n_nets)
         nu = np.ones(n_nets)
         params_full['is_trials_type'] = type_kernel
-        full_A, full_phi, additional_return = run_GraFT(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
+        full_A, full_phi, additional_return = run_SiBBlInGS(data = 'data_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, corr_kern = [],  
               params = params_full , grannet=True, images = False, data_type = type_grannet , 
               labels_name = 'labels_%s_xmin_0_xmax_n_ymin_0_ymax_n.npy'%type_grannet, nu =nu) #'kernel_synth_xmin_0_xmax_70_ymin_0_ymax_70.npy''kernel_synth_grannet_xmin_0_xmax_n_ymin_0_ymax_n.npy'
             
