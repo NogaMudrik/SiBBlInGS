@@ -2,11 +2,14 @@
 # SiBBlInGS:
 ##  Similarity-driven Building-Block Inference using Graphs across States
 **NOW AT ICML 2024!!**
-This is the code for: Mudrik, N., Mishne, G., & Charles, A. S. (2024). SiBBlinGS: Similarity-driven Building-Block Inference Using Graphs Across States. In Proceedings of the Forty-first International Conference on Machine Learning. [LINK]([https://arxiv.org/abs/2306.04817](https://openreview.net/forum?id=h8aTi32tul).
+This is the code for: Mudrik, N., Mishne, G., & Charles, A. S. (2024). SiBBlinGS: Similarity-driven Building-Block Inference Using Graphs Across States. In Proceedings of the Forty-first International Conference on Machine Learning. [LINK](https://openreview.net/forum?id=h8aTi32tul).
 
 
 if you use the code, please cite the above paper.
+
+
 bibtex:
+
 @inproceedings{
 mudrik2024sibblings,
 title={Si{BB}lIn{GS}: Similarity-driven Building-Block Inference using Graphs across States},
